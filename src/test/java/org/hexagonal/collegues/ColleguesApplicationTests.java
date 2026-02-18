@@ -1,0 +1,13 @@
+package org.hexagonal.collegues;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ColleguesApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
