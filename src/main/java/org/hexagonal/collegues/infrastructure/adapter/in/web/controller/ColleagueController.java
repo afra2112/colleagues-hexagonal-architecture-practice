@@ -2,12 +2,15 @@ package org.hexagonal.collegues.infrastructure.adapter.in.web.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.hexagonal.collegues.application.usecase.DeleteColleagueUseCase;
 import org.hexagonal.collegues.application.usecase.GetColleagueUseCase;
 import org.hexagonal.collegues.domain.ports.in.CreateColleagueUseCase;
 import org.hexagonal.collegues.infrastructure.adapter.in.web.dto.custombean.Dni;
 import org.hexagonal.collegues.infrastructure.adapter.in.web.dto.request.ColleagueRequest;
+import org.hexagonal.collegues.infrastructure.adapter.in.web.dto.response.ApiError;
 import org.hexagonal.collegues.infrastructure.adapter.in.web.dto.response.ColleagueResponse;
 import org.hexagonal.collegues.infrastructure.adapter.out.persistence.mapper.ColleagueMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,7 @@ public class ColleagueController {
 
     private final GetColleagueUseCase getColleagueUseCase;
     private final CreateColleagueUseCase createColleagueUseCase;
+    private final DeleteColleagueUseCase deleteColleagueUseCase;
     private final ColleagueMapper colleagueMapper;
 
     @PostMapping
@@ -33,5 +37,11 @@ public class ColleagueController {
         return ResponseEntity.ok(
                 colleagueMapper.toResponse(getColleagueUseCase.getColleagueByDni(dni))
         );
+    }
+
+    @DeleteMapping("/{dni}")
+    public ResponseEntity<Void> deleteByDNI(@Valid @PathVariable @Dni String dni){
+        deleteColleagueUseCase.deleteColleagueByDni(dni);
+        return ResponseEntity.noContent().build();
     }
 }

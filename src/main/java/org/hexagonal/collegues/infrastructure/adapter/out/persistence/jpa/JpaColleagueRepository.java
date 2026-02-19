@@ -10,4 +10,6 @@ public interface JpaColleagueRepository extends JpaRepository<ColleagueEntity, L
     boolean existsByDni(String dni);
 
     Optional<ColleagueEntity> findByDni(String dni);
+
+    void deleteByDni(String dni);
 }

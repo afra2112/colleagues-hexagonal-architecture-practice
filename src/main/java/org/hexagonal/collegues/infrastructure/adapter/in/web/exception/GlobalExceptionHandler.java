@@ -18,11 +18,11 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    public ApiError buildApiError(ErrorCodeEnum code, HttpServletRequest request, List<FieldError> errors){
+    public ApiError buildApiError(ErrorCodeEnum code, String message, HttpServletRequest request, List<FieldError> errors){
         return new ApiError(
                 code,
                 code.getCode(),
-                code.getMessage(),
+                message,
                 code.getStatus(),
                 LocalDateTime.now(),
                 request.getRequestURI(),
@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
                 .status(ex.getErrorCodeEnum().getStatus())
                 .body(buildApiError(
                         ex.getErrorCodeEnum(),
+                        ex.getMessage(),
                         request,
                         null
                 ));
@@ -47,6 +48,7 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(buildApiError(
                         ErrorCodeEnum.SPRING_VALIDATION,
+                        ex.getMessage(),
                         request,
                         ex.getBindingResult().getFieldErrors()
                                 .stream()
@@ -61,6 +63,7 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(buildApiError(
                         ErrorCodeEnum.SPRING_VALIDATION,
+                        ex.getMessage(),
                         request,
                         ex.getAllErrors()
                                 .stream()

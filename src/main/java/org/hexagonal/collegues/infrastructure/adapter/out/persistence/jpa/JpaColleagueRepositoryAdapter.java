@@ -7,6 +7,7 @@ import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
 import org.hexagonal.collegues.domain.model.Colleague;
 import org.hexagonal.collegues.infrastructure.adapter.out.persistence.mapper.ColleagueMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -32,5 +33,11 @@ public class JpaColleagueRepositoryAdapter implements ColleagueRepositoryPort {
     @Override
     public boolean existsByDni(String dni) {
         return jpaColleagueRepository.existsByDni(dni);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByDni(String dni) {
+        jpaColleagueRepository.deleteByDni(dni);
     }
 }
