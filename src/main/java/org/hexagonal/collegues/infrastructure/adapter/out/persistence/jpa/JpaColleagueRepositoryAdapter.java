@@ -1,6 +1,8 @@
 package org.hexagonal.collegues.infrastructure.adapter.out.persistence.jpa;
 
 import lombok.RequiredArgsConstructor;
+import org.hexagonal.collegues.domain.exception.BusinessException;
+import org.hexagonal.collegues.domain.exception.ErrorCodeEnum;
 import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
 import org.hexagonal.collegues.domain.model.Colleague;
 import org.hexagonal.collegues.infrastructure.adapter.out.persistence.mapper.ColleagueMapper;
@@ -18,6 +20,13 @@ public class JpaColleagueRepositoryAdapter implements ColleagueRepositoryPort {
         return colleagueMapper.toPOJO(
                 jpaColleagueRepository.save(colleagueMapper.toEntity(colleague))
         );
+    }
+
+    @Override
+    public Colleague getByDni(String dni) {
+        return colleagueMapper.toPOJO(jpaColleagueRepository.findByDni(dni).orElseThrow(
+                () -> new BusinessException(ErrorCodeEnum.ENTITY_NOT_FOUND, "Colleague not found by dni: " + dni)
+        ));
     }
 
     @Override

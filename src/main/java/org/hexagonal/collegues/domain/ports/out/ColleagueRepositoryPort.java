@@ -6,5 +6,7 @@ public interface ColleagueRepositoryPort {
 
     Colleague save(Colleague colleague);
 
+    Colleague getByDni(String dni);
+
     boolean existsByDni(String dni);
 }

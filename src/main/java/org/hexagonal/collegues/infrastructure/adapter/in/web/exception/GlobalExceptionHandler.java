@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,6 +51,20 @@ public class GlobalExceptionHandler {
                         ex.getBindingResult().getFieldErrors()
                                 .stream()
                                 .map(error -> new FieldError(error.getField(), error.getDefaultMessage()))
+                                .toList()
+                ));
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ApiError> handlePathVariableValidation(HandlerMethodValidationException ex, HttpServletRequest request){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(
+                        ErrorCodeEnum.SPRING_VALIDATION,
+                        request,
+                        ex.getAllErrors()
+                                .stream()
+                                .map(error -> new FieldError("parameter", error.getDefaultMessage()))
                                 .toList()
                 ));
     }

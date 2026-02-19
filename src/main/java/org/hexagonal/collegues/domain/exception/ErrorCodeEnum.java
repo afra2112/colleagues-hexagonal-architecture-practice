@@ -4,7 +4,8 @@ package org.hexagonal.collegues.domain.exception;
 public enum ErrorCodeEnum {
 
     USER_ALREADY_EXISTS("ERR-001", 409, "Colleague already exists with that dni."),
-    SPRING_VALIDATION("ERR-002", 400, "Spring validation errors: ");
+    SPRING_VALIDATION("ERR-002", 400, "Spring validation errors: "),
+    ENTITY_NOT_FOUND("ERR-003", 404, "Entity was not found");
 
     private final String code;
     private final int status;

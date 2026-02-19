@@ -1,7 +1,8 @@
 package org.hexagonal.collegues.infrastructure.config;
 
+import org.hexagonal.collegues.application.usecase.GetColleagueUseCase;
 import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
-import org.hexagonal.collegues.application.usecase.CreateColleagueUseCaseImpl;
+import org.hexagonal.collegues.application.usecase.CreateColleagueUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +10,12 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public CreateColleagueUseCaseImpl createColleagueUseCaseImpl(ColleagueRepositoryPort colleagueRepositoryPort){
-        return new CreateColleagueUseCaseImpl(colleagueRepositoryPort);
+    public CreateColleagueUseCase createColleagueUseCaseImpl(ColleagueRepositoryPort colleagueRepositoryPort){
+        return new CreateColleagueUseCase(colleagueRepositoryPort);
+    }
+
+    @Bean
+    public GetColleagueUseCase getColleagueUseCase(ColleagueRepositoryPort colleagueRepositoryPort){
+        return new GetColleagueUseCase(colleagueRepositoryPort);
     }
 }

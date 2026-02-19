@@ -1,8 +1,5 @@
 package org.hexagonal.collegues.domain.exception;
 
-import lombok.Getter;
-
-@Getter
 public class BusinessException extends RuntimeException {
 
     private final ErrorCodeEnum errorCodeEnum;
@@ -15,5 +12,9 @@ public class BusinessException extends RuntimeException {
     public BusinessException(ErrorCodeEnum code, String customMessage) {
         super(customMessage);
         this.errorCodeEnum = code;
+    }
+
+    public ErrorCodeEnum getErrorCodeEnum() {
+        return errorCodeEnum;
     }
 }

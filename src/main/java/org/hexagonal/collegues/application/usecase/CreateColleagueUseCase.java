@@ -2,15 +2,14 @@ package org.hexagonal.collegues.application.usecase;
 
 import org.hexagonal.collegues.domain.exception.BusinessException;
 import org.hexagonal.collegues.domain.exception.ErrorCodeEnum;
-import org.hexagonal.collegues.domain.ports.in.CreateColleagueUseCase;
 import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
 import org.hexagonal.collegues.domain.model.Colleague;
 
-public class CreateColleagueUseCaseImpl implements CreateColleagueUseCase {
+public class CreateColleagueUseCase implements org.hexagonal.collegues.domain.ports.in.CreateColleagueUseCase {
 
     private final ColleagueRepositoryPort colleagueRepositoryPort;
 
-    public CreateColleagueUseCaseImpl(ColleagueRepositoryPort colleagueRepositoryPort){
+    public CreateColleagueUseCase(ColleagueRepositoryPort colleagueRepositoryPort){
         this.colleagueRepositoryPort = colleagueRepositoryPort;
     }
 
