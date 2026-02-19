@@ -1,4 +1,4 @@
-package org.hexagonal.collegues.application.ports.in;
+package org.hexagonal.collegues.domain.ports.in;
 
 import org.hexagonal.collegues.domain.model.Colleague;
 

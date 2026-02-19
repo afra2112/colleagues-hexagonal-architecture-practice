@@ -1,4 +1,4 @@
-package org.hexagonal.collegues.infrastructure.entity;
+package org.hexagonal.collegues.infrastructure.adapter.out.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,9 @@ public class ColleagueEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long colleagueId;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String dni;
 }
