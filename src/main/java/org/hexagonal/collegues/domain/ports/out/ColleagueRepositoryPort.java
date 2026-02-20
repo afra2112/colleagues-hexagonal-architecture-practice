@@ -8,6 +8,8 @@ public interface ColleagueRepositoryPort {
 
     Colleague getByDni(String dni);
 
+    Colleague updateColleague(Colleague colleague, String dni);
+
     boolean existsByDni(String dni);
 
     void deleteByDni(String dni);

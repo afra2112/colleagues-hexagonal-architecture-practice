@@ -5,6 +5,7 @@ import org.hexagonal.collegues.domain.exception.BusinessException;
 import org.hexagonal.collegues.domain.exception.ErrorCodeEnum;
 import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
 import org.hexagonal.collegues.domain.model.Colleague;
+import org.hexagonal.collegues.infrastructure.adapter.out.persistence.entity.ColleagueEntity;
 import org.hexagonal.collegues.infrastructure.adapter.out.persistence.mapper.ColleagueMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,14 @@ public class JpaColleagueRepositoryAdapter implements ColleagueRepositoryPort {
         return colleagueMapper.toPOJO(jpaColleagueRepository.findByDni(dni).orElseThrow(
                 () -> new BusinessException(ErrorCodeEnum.ENTITY_NOT_FOUND, "Colleague not found by dni: " + dni)
         ));
+    }
+
+    @Override
+    public Colleague updateColleague(Colleague colleague, String dni) {
+        ColleagueEntity entity = jpaColleagueRepository.findByDni(dni).orElseThrow(
+                () -> new BusinessException(ErrorCodeEnum.ENTITY_NOT_FOUND, "Entity not found by dni: " + dni)
+        );
+        return colleagueMapper.toPOJO(jpaColleagueRepository.save(colleagueMapper.toEntityUpdate(entity, colleague)));
     }
 
     @Override

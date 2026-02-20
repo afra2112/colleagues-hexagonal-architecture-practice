@@ -24,4 +24,10 @@ public class ColleagueMapper {
     public ColleagueResponse toResponse(Colleague colleague){
         return new ColleagueResponse(colleague.id(), colleague.name(), colleague.dni());
     }
+
+    public ColleagueEntity toEntityUpdate(ColleagueEntity entity, Colleague colleague){
+        entity.setName(colleague.name());
+        entity.setDni(colleague.dni());
+        return entity;
+    }
 }

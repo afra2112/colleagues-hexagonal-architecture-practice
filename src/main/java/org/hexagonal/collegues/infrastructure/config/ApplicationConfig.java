@@ -2,6 +2,7 @@ package org.hexagonal.collegues.infrastructure.config;
 
 import org.hexagonal.collegues.application.usecase.DeleteColleagueUseCase;
 import org.hexagonal.collegues.application.usecase.GetColleagueUseCase;
+import org.hexagonal.collegues.application.usecase.UpdateColleagueUseCase;
 import org.hexagonal.collegues.domain.ports.out.ColleagueRepositoryPort;
 import org.hexagonal.collegues.application.usecase.CreateColleagueUseCase;
 import org.springframework.context.annotation.Bean;
@@ -23,5 +24,10 @@ public class ApplicationConfig {
     @Bean
     public DeleteColleagueUseCase deleteColleagueUseCase(ColleagueRepositoryPort colleagueRepositoryPort){
         return new DeleteColleagueUseCase(colleagueRepositoryPort);
+    }
+
+    @Bean
+    public UpdateColleagueUseCase updateColleagueUseCase(ColleagueRepositoryPort colleagueRepositoryPort){
+        return new UpdateColleagueUseCase(colleagueRepositoryPort);
     }
 }
